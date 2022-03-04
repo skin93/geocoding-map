@@ -10,7 +10,6 @@ exports.getPlaces = async (req, res) => {
       access_token: process.env.API_KEY,
       ...url.parse(req.url, true).query,
     });
-    console.log(params);
     const query = req.params.query;
     const { data } = await axios.get(
       `https://api.mapbox.com/geocoding/v5/mapbox.places/${query}.json?${params}}`
