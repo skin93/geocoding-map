@@ -6,9 +6,9 @@
 
 <script setup>
 import L from "leaflet";
-import { onMounted, ref, reactive } from "vue";
+import { onMounted, ref } from "vue";
 
-let map = reactive();
+let map;
 
 const coords = ref(null);
 const fetchCoords = ref(null);
