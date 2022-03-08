@@ -12,6 +12,7 @@
       @getLocation="getGeoLocation"
       @plotResult="plotResult"
       @toggleSearchResults="toggleSearchResults"
+      @removeResult="removeResult"
     />
     <div id="map" class="h-full z-[1]"></div>
   </h1>
@@ -119,6 +120,10 @@ const toggleSearchResults = () => {
 
 const closeSearchResults = () => {
   searchResults.value = null;
+};
+
+const removeResult = () => {
+  map.removeLayer(resultMarker.value);
 };
 
 onMounted(() => {
