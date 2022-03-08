@@ -1,5 +1,10 @@
 <template>
   <h1 class="h-screen relative">
+    <GeoErrorModal
+      v-if="geoError"
+      :geoErrorMsg="geoErrorMsg"
+      @closeGeoError="closeGeoError"
+    />
     <div id="map" class="h-full z-[1]"></div>
   </h1>
 </template>
@@ -7,12 +12,15 @@
 <script setup>
 import L from "leaflet";
 import { onMounted, ref } from "vue";
+import GeoErrorModal from "@/components/GeoErrorModal";
 
 let map;
 
 const coords = ref(null);
 const fetchCoords = ref(null);
 const geoMarker = ref(null);
+const geoError = ref(null);
+const geoErrorMsg = ref(null);
 
 const getGeolocation = () => {
   if (sessionStorage.getItem("coords")) {
@@ -42,7 +50,14 @@ const setCoords = (pos) => {
 };
 
 const getLocError = (err) => {
-  console.log(err);
+  fetchCoords.value = null;
+  geoError.value = true;
+  geoErrorMsg.value = err.message;
+};
+
+const closeGeoError = (err) => {
+  geoError.value = null;
+  geoErrorMsg.value = err.null;
 };
 
 const plotGeolocation = (coords) => {
