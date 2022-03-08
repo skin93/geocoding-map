@@ -90,7 +90,7 @@ const search = () => {
           : "0,0",
       });
       const getData = await axios.get(
-        `http://localhost:5000/api/search/${searchQuery.value}?${params}`
+        `api/search/${searchQuery.value}?${params}`
       );
       searchData.value = getData.data.features;
     }

@@ -24,6 +24,10 @@ app.get("/api/search/:query", async (req, res) => {
   }
 });
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(`${__dirname}/public`));
+}
+
 app.listen(PORT, () => {
   console.log(`App has started on port: ${PORT}`);
 });
