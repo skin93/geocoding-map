@@ -8,7 +8,10 @@
     <MapFeatures
       :coords="coords"
       :fetchCoords="fetchCoords"
+      :searchResults="searchResults"
       @getLocation="getGeoLocation"
+      @plotResult="plotResult"
+      @toggleSearchResults="toggleSearchResults"
     />
     <div id="map" class="h-full z-[1]"></div>
   </h1>
@@ -27,6 +30,8 @@ const fetchCoords = ref(null);
 const geoMarker = ref(null);
 const geoError = ref(null);
 const geoErrorMsg = ref(null);
+const resultMarker = ref(null);
+const searchResults = ref(null);
 
 const getGeoLocation = () => {
   if (coords.value) {
@@ -86,6 +91,36 @@ const plotGeolocation = (coords) => {
   map.setView([coords.lat, coords.lng], 10);
 };
 
+const plotResult = (coords) => {
+  if (resultMarker.value) {
+    map.removeLayer(resultMarker.value);
+  }
+
+  const customMarker = L.icon({
+    iconUrl: require("../assets/map-marker-blue.svg"),
+    iconSize: [35, 35],
+  });
+
+  resultMarker.value = L.marker(
+    [coords.coordinates[1], coords.coordinates[0]],
+    {
+      icon: customMarker,
+    }
+  ).addTo(map);
+
+  map.setView([coords.coordinates[1], coords.coordinates[0]], 14);
+
+  closeSearchResults();
+};
+
+const toggleSearchResults = () => {
+  searchResults.value = !searchResults.value;
+};
+
+const closeSearchResults = () => {
+  searchResults.value = null;
+};
+
 onMounted(() => {
   map = L.map("map").setView([51.505, -0.09], 13);
 
@@ -101,6 +136,10 @@ onMounted(() => {
       accessToken: process.env.VUE_APP_API_KEY,
     }
   ).addTo(map);
+
+  map.on("moveend", () => {
+    closeSearchResults();
+  });
 
   getGeoLocation();
 });
