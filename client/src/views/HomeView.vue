@@ -1,5 +1,5 @@
 <template>
-  <h1 class="h-screen relative">
+  <div class="h-screen relative">
     <GeoErrorModal
       v-if="geoError"
       :geoErrorMsg="geoErrorMsg"
@@ -15,7 +15,7 @@
       @removeResult="removeResult"
     />
     <div id="map" class="h-full z-[1]"></div>
-  </h1>
+  </div>
 </template>
 
 <script setup>
