@@ -1,5 +1,5 @@
 # Geocoding Map
-Basic application that let us to search for places and display address information.
+Basic application to search for places and display address information.
 
 ### Technologies and libraries
 - [Vue 3](https://vuejs.org/)
@@ -8,10 +8,10 @@ Basic application that let us to search for places and display address informati
 - [Leaflet](https://leafletjs.com/SlavaUkraini/)
 - [Mapbox Geocoding API](https://docs.mapbox.com/api/search/geocoding/)
 
-### Set up
+### Project setup
 
-1. Visit [Mapbox](https://www.mapbox.com/) site, log in and add two access tokens: one for a client and one for a server
-2. Clone a repo, install dependencies
+1. Visit [Mapbox](https://www.mapbox.com/), log in and add two access tokens: one for a client and one for a server
+2. Clone a repo, install dependencies with ```yarn install```
 3. Add ```.env``` file: both in the client and server folders
 4. Fill in ```VUE_APP_API_KEY``` (client) and ```API_KEY``` (server) with values from Mapbox
 5. Run client with ```yarn serve``` and run server with ```yarn dev``` (dev mode) or ```yarn start``` (prod mode)
